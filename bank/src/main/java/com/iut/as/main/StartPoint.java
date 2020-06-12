@@ -18,11 +18,6 @@ public class StartPoint {
 	public static void main(String[] args) {
 		try {
 			// Connection à la base MySQL :
-			System.out.println("connexion");
-			System.out.println("connexion");
-			System.out.println("connexion");
-			System.out.println("connexion");
-			System.out.println("connexion");
 			DaoFactory daoF = DaoFactory.getDaoFactory(EPersistance.MYSQL);
 			// Connection à la table 'compte' :
 			IDaoCompte dao = daoF.getDaoCompte();
