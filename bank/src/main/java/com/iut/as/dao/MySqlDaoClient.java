@@ -73,7 +73,7 @@ public class MySqlDaoClient implements IDaoClient {
 			try (ResultSet res = requete.executeQuery()) {
 				// Tant qu'un enregistrement existe :
 				while (res.next()) {
-					Client client = new Client(res.getString("userId"), res.getString("nom"), res.getString("adresse"));
+					Client client = new Client(res.getString("userId"), res.getString("nom"), res.getString("prenom"), res.getString("adresse"));
 					client.setPrenom(res.getString("prenom"));
 					client.setPassword(res.getString("userPwd"));
 					return client;
@@ -101,7 +101,7 @@ public class MySqlDaoClient implements IDaoClient {
 			try (ResultSet res = requete.executeQuery()) {
 				// Tant qu'un enregistrement existe :
 				while (res.next()) {
-					Client client = new Client(res.getString("userId"), res.getString("nom"), res.getString("adresse"));
+					Client client = new Client(res.getString("userId"), res.getString("nom"),res.getString("prenom"), res.getString("adresse"));
 					// Il faut tester si compte avec ou sans découvert :
 					client.addCompte(new CompteSansDecouvert(res.getString("numeroCompte"), res.getDouble("solde")));
 					clients.add(client);

@@ -28,10 +28,11 @@ public class Client {
 		return comptes;
 	}
 
-	public Client(String numeroClient, String nom, String adresse) {
+	public Client(String numeroClient, String nom, String prenom, String adresse) {
 		super();
 		this.numeroClient = numeroClient;
 		this.nom = nom;
+		this.prenom=prenom;
 		this.adresse = adresse;
 		this.comptes = new ArrayList<>();
 	}
