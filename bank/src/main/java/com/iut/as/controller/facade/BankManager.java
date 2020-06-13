@@ -5,6 +5,7 @@ import static com.iut.as.factory.dao.DaoFactory.getDaoFactory;
 
 import java.util.List;
 
+import com.iut.as.dao.MySqlDaoCompte;
 import org.apache.log4j.Logger;
 
 import com.iut.as.exceptions.BankBusinessException;
@@ -20,7 +21,7 @@ import com.iut.as.modele.Compte;
  */
 public class BankManager {
 
-	private DaoFactory dao;
+	public DaoFactory dao;
 
 	private static final Logger logger = Logger.getLogger(BankManager.class);
 
@@ -63,6 +64,7 @@ public class BankManager {
 		return dao.getDaoCompte().getComptesByClient(numeroClient);
 	}
 
+
 	public void getComptesByClient(Client client) {
 		// 2ème appel DB :
 		logger.info("======= Appel DB");
@@ -75,4 +77,5 @@ public class BankManager {
 			logger.info("le client possède : " + client.getComptes().size() + " compte(s)");
 		}
 	}
+
 }

@@ -4,6 +4,7 @@ import static org.apache.log4j.Logger.getLogger;
 
 import java.util.List;
 
+import com.iut.as.dao.MySqlDaoCompte;
 import org.apache.log4j.Logger;
 
 import com.iut.as.controller.facade.BankManager;
@@ -37,6 +38,24 @@ public class LoginController extends ActionSupport {
 	// Le client connecté :
 	private Client clientConnecte;
 	private List<Compte> comptesClient;
+
+	private String numeroCompte;
+	private Double montant;
+
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch(NumberFormatException e){
+			return false;
+		}
+	}
+
+	public void setMontant(String montant){
+		if(isNumeric(montant)){
+			this.montant = Double.parseDouble(montant);
+		}
+	}
 
 	public List<Compte> getComptesClient() {
 		return comptesClient;
@@ -78,6 +97,10 @@ public class LoginController extends ActionSupport {
 
 	public void setClientConnecte(Client clientConnecte) {
 		this.clientConnecte = clientConnecte;
+	}
+
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
 	}
 
 	public String getUserCde() {
@@ -128,6 +151,14 @@ public class LoginController extends ActionSupport {
 		logger.info("Demande de la liste des comptes ... pour le client : " + this.numeroClient);
 		setComptesClient(manager.getComptesByClient(numeroClient));
 		listeComptesOk = true;
+		return ActionSupport.SUCCESS;
+	}
+
+	public String crediter(){
+		logger.info("Demande d'ajout de "+this.montant+" au solde du compte "+ this.numeroCompte);
+		Compte compte = manager.dao.getDaoCompte().readByKey(this.numeroCompte);
+		compte.crediter(this.montant);
+		manager.dao.getDaoCompte().update(compte);
 		return ActionSupport.SUCCESS;
 	}
 }
